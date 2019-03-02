@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpool.dao.CarpoolListMapper" >
+  <resultMap id="BaseResultMap" type="com.carpool.entity.CarpoolList" >
+    <id column="l_id" property="lId" jdbcType="BIGINT" />
+    <result column="l_create_user_id" property="lCreateUserId" jdbcType="BIGINT" />
+    <result column="l_start_place" property="lStartPlace" jdbcType="VARCHAR" />
+    <result column="l_end_place" property="lEndPlace" jdbcType="VARCHAR" />
+    <result column="l_time" property="lTime" jdbcType="TIMESTAMP" />
+    <result column="l_max_number" property="lMaxNumber" jdbcType="INTEGER" />
+    <result column="l_number" property="lNumber" jdbcType="INTEGER" />
+    <result column="l_carpool_mode" property="lCarpoolMode" jdbcType="VARCHAR" />
+    <result column="l_has_car" property="lHasCar" jdbcType="VARCHAR" />
+    <result column="l_gender_requirement" property="lGenderRequirement" jdbcType="VARCHAR" />
+    <result column="l_extra" property="lExtra" jdbcType="VARCHAR" />
+    <result column="l_state" property="lState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    l_id, l_create_user_id, l_start_place, l_end_place, l_time, l_max_number, l_number, 
+    l_carpool_mode, l_has_car, l_gender_requirement, l_extra, l_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_carpool_list
+    where l_id = #{lId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_carpool_list
+    where l_id = #{lId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.carpool.entity.CarpoolList" >
+    insert into t_carpool_list (l_id, l_create_user_id, l_start_place, 
+      l_end_place, l_time, l_max_number, 
+      l_number, l_carpool_mode, l_has_car, 
+      l_gender_requirement, l_extra, l_state
+      )
+    values (#{lId,jdbcType=BIGINT}, #{lCreateUserId,jdbcType=BIGINT}, #{lStartPlace,jdbcType=VARCHAR}, 
+      #{lEndPlace,jdbcType=VARCHAR}, #{lTime,jdbcType=TIMESTAMP}, #{lMaxNumber,jdbcType=INTEGER}, 
+      #{lNumber,jdbcType=INTEGER}, #{lCarpoolMode,jdbcType=VARCHAR}, #{lHasCar,jdbcType=VARCHAR}, 
+      #{lGenderRequirement,jdbcType=VARCHAR}, #{lExtra,jdbcType=VARCHAR}, #{lState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.carpool.entity.CarpoolList" >
+    insert into t_carpool_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lId != null" >
+        l_id,
+      </if>
+      <if test="lCreateUserId != null" >
+        l_create_user_id,
+      </if>
+      <if test="lStartPlace != null" >
+        l_start_place,
+      </if>
+      <if test="lEndPlace != null" >
+        l_end_place,
+      </if>
+      <if test="lTime != null" >
+        l_time,
+      </if>
+      <if test="lMaxNumber != null" >
+        l_max_number,
+      </if>
+      <if test="lNumber != null" >
+        l_number,
+      </if>
+      <if test="lCarpoolMode != null" >
+        l_carpool_mode,
+      </if>
+      <if test="lHasCar != null" >
+        l_has_car,
+      </if>
+      <if test="lGenderRequirement != null" >
+        l_gender_requirement,
+      </if>
+      <if test="lExtra != null" >
+        l_extra,
+      </if>
+      <if test="lState != null" >
+        l_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lId != null" >
+        #{lId,jdbcType=BIGINT},
+      </if>
+      <if test="lCreateUserId != null" >
+        #{lCreateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lStartPlace != null" >
+        #{lStartPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lEndPlace != null" >
+        #{lEndPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lTime != null" >
+        #{lTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lMaxNumber != null" >
+        #{lMaxNumber,jdbcType=INTEGER},
+      </if>
+      <if test="lNumber != null" >
+        #{lNumber,jdbcType=INTEGER},
+      </if>
+      <if test="lCarpoolMode != null" >
+        #{lCarpoolMode,jdbcType=VARCHAR},
+      </if>
+      <if test="lHasCar != null" >
+        #{lHasCar,jdbcType=VARCHAR},
+      </if>
+      <if test="lGenderRequirement != null" >
+        #{lGenderRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="lExtra != null" >
+        #{lExtra,jdbcType=VARCHAR},
+      </if>
+      <if test="lState != null" >
+        #{lState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carpool.entity.CarpoolList" >
+    update t_carpool_list
+    <set >
+      <if test="lCreateUserId != null" >
+        l_create_user_id = #{lCreateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lStartPlace != null" >
+        l_start_place = #{lStartPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lEndPlace != null" >
+        l_end_place = #{lEndPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lTime != null" >
+        l_time = #{lTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lMaxNumber != null" >
+        l_max_number = #{lMaxNumber,jdbcType=INTEGER},
+      </if>
+      <if test="lNumber != null" >
+        l_number = #{lNumber,jdbcType=INTEGER},
+      </if>
+      <if test="lCarpoolMode != null" >
+        l_carpool_mode = #{lCarpoolMode,jdbcType=VARCHAR},
+      </if>
+      <if test="lHasCar != null" >
+        l_has_car = #{lHasCar,jdbcType=VARCHAR},
+      </if>
+      <if test="lGenderRequirement != null" >
+        l_gender_requirement = #{lGenderRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="lExtra != null" >
+        l_extra = #{lExtra,jdbcType=VARCHAR},
+      </if>
+      <if test="lState != null" >
+        l_state = #{lState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where l_id = #{lId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carpool.entity.CarpoolList" >
+    update t_carpool_list
+    set l_create_user_id = #{lCreateUserId,jdbcType=BIGINT},
+      l_start_place = #{lStartPlace,jdbcType=VARCHAR},
+      l_end_place = #{lEndPlace,jdbcType=VARCHAR},
+      l_time = #{lTime,jdbcType=TIMESTAMP},
+      l_max_number = #{lMaxNumber,jdbcType=INTEGER},
+      l_number = #{lNumber,jdbcType=INTEGER},
+      l_carpool_mode = #{lCarpoolMode,jdbcType=VARCHAR},
+      l_has_car = #{lHasCar,jdbcType=VARCHAR},
+      l_gender_requirement = #{lGenderRequirement,jdbcType=VARCHAR},
+      l_extra = #{lExtra,jdbcType=VARCHAR},
+      l_state = #{lState,jdbcType=INTEGER}
+    where l_id = #{lId,jdbcType=BIGINT}
+  </update>
+</mapper>

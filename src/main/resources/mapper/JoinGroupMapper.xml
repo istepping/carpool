@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpool.dao.JoinGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.carpool.entity.JoinGroup" >
+    <id column="j_id" property="jId" jdbcType="BIGINT" />
+    <result column="g_id" property="gId" jdbcType="BIGINT" />
+    <result column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="j_time" property="jTime" jdbcType="TIMESTAMP" />
+    <result column="j_identity" property="jIdentity" jdbcType="INTEGER" />
+    <result column="j_state" property="jState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    j_id, g_id, u_id, j_time, j_identity, j_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_join_group
+    where j_id = #{jId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_join_group
+    where j_id = #{jId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.carpool.entity.JoinGroup" >
+    insert into t_join_group (j_id, g_id, u_id, j_time, 
+      j_identity, j_state)
+    values (#{jId,jdbcType=BIGINT}, #{gId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{jTime,jdbcType=TIMESTAMP}, 
+      #{jIdentity,jdbcType=INTEGER}, #{jState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carpool.entity.JoinGroup" >
+    insert into t_join_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jId != null" >
+        j_id,
+      </if>
+      <if test="gId != null" >
+        g_id,
+      </if>
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="jTime != null" >
+        j_time,
+      </if>
+      <if test="jIdentity != null" >
+        j_identity,
+      </if>
+      <if test="jState != null" >
+        j_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jId != null" >
+        #{jId,jdbcType=BIGINT},
+      </if>
+      <if test="gId != null" >
+        #{gId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="jTime != null" >
+        #{jTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jIdentity != null" >
+        #{jIdentity,jdbcType=INTEGER},
+      </if>
+      <if test="jState != null" >
+        #{jState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carpool.entity.JoinGroup" >
+    update t_join_group
+    <set >
+      <if test="gId != null" >
+        g_id = #{gId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null" >
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="jTime != null" >
+        j_time = #{jTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jIdentity != null" >
+        j_identity = #{jIdentity,jdbcType=INTEGER},
+      </if>
+      <if test="jState != null" >
+        j_state = #{jState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where j_id = #{jId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carpool.entity.JoinGroup" >
+    update t_join_group
+    set g_id = #{gId,jdbcType=BIGINT},
+      u_id = #{uId,jdbcType=BIGINT},
+      j_time = #{jTime,jdbcType=TIMESTAMP},
+      j_identity = #{jIdentity,jdbcType=INTEGER},
+      j_state = #{jState,jdbcType=INTEGER}
+    where j_id = #{jId,jdbcType=BIGINT}
+  </update>
+</mapper>

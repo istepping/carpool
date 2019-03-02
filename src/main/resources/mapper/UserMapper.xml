@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpool.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.carpool.entity.User" >
+    <id column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="wx_id" property="wxId" jdbcType="VARCHAR" />
+    <result column="u_nick_name" property="uNickName" jdbcType="VARCHAR" />
+    <result column="u_avatar_url" property="uAvatarUrl" jdbcType="VARCHAR" />
+    <result column="u_gender" property="uGender" jdbcType="VARCHAR" />
+    <result column="u_city" property="uCity" jdbcType="VARCHAR" />
+    <result column="u_province" property="uProvince" jdbcType="VARCHAR" />
+    <result column="u_language" property="uLanguage" jdbcType="VARCHAR" />
+    <result column="u_state" property="uState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    u_id, wx_id, u_nick_name, u_avatar_url, u_gender, u_city, u_province, u_language, 
+    u_state
+  </sql>
+  <select id="selectByWxId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where wx_id = #{wxId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where u_id = #{uId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user
+    where u_id = #{uId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.carpool.entity.User" >
+    insert into t_user (u_id, wx_id, u_nick_name, 
+      u_avatar_url, u_gender, u_city, 
+      u_province, u_language, u_state
+      )
+    values (#{uId,jdbcType=BIGINT}, #{wxId,jdbcType=VARCHAR}, #{uNickName,jdbcType=VARCHAR}, 
+      #{uAvatarUrl,jdbcType=VARCHAR}, #{uGender,jdbcType=VARCHAR}, #{uCity,jdbcType=VARCHAR}, 
+      #{uProvince,jdbcType=VARCHAR}, #{uLanguage,jdbcType=VARCHAR}, #{uState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.carpool.entity.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="wxId != null" >
+        wx_id,
+      </if>
+      <if test="uNickName != null" >
+        u_nick_name,
+      </if>
+      <if test="uAvatarUrl != null" >
+        u_avatar_url,
+      </if>
+      <if test="uGender != null" >
+        u_gender,
+      </if>
+      <if test="uCity != null" >
+        u_city,
+      </if>
+      <if test="uProvince != null" >
+        u_province,
+      </if>
+      <if test="uLanguage != null" >
+        u_language,
+      </if>
+      <if test="uState != null" >
+        u_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="wxId != null" >
+        #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNickName != null" >
+        #{uNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="uAvatarUrl != null" >
+        #{uAvatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uGender != null" >
+        #{uGender,jdbcType=VARCHAR},
+      </if>
+      <if test="uCity != null" >
+        #{uCity,jdbcType=VARCHAR},
+      </if>
+      <if test="uProvince != null" >
+        #{uProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="uLanguage != null" >
+        #{uLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="uState != null" >
+        #{uState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carpool.entity.User" >
+    update t_user
+    <set >
+      <if test="wxId != null" >
+        wx_id = #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNickName != null" >
+        u_nick_name = #{uNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="uAvatarUrl != null" >
+        u_avatar_url = #{uAvatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uGender != null" >
+        u_gender = #{uGender,jdbcType=VARCHAR},
+      </if>
+      <if test="uCity != null" >
+        u_city = #{uCity,jdbcType=VARCHAR},
+      </if>
+      <if test="uProvince != null" >
+        u_province = #{uProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="uLanguage != null" >
+        u_language = #{uLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="uState != null" >
+        u_state = #{uState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carpool.entity.User" >
+    update t_user
+    set wx_id = #{wxId,jdbcType=VARCHAR},
+      u_nick_name = #{uNickName,jdbcType=VARCHAR},
+      u_avatar_url = #{uAvatarUrl,jdbcType=VARCHAR},
+      u_gender = #{uGender,jdbcType=VARCHAR},
+      u_city = #{uCity,jdbcType=VARCHAR},
+      u_province = #{uProvince,jdbcType=VARCHAR},
+      u_language = #{uLanguage,jdbcType=VARCHAR},
+      u_state = #{uState,jdbcType=VARCHAR}
+    where u_id = #{uId,jdbcType=BIGINT}
+  </update>
+</mapper>
