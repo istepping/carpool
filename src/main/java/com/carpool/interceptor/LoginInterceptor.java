@@ -1,7 +1,6 @@
 package com.carpool.interceptor;
 
 import com.carpool.base.BaseController;
-import com.carpool.utils.Assist;
 import com.carpool.utils.AuthUtil;
 import net.sf.json.JSONObject;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -9,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.util.logging.Logger;
 
 import static com.carpool.utils.Assist.print;
 
