@@ -12,13 +12,20 @@
     <result column="l_carpool_mode" property="lCarpoolMode" jdbcType="VARCHAR" />
     <result column="l_has_car" property="lHasCar" jdbcType="VARCHAR" />
     <result column="l_gender_requirement" property="lGenderRequirement" jdbcType="VARCHAR" />
+    <result column="l_create_time" property="lCreateTime" jdbcType="TIMESTAMP" />
     <result column="l_extra" property="lExtra" jdbcType="VARCHAR" />
     <result column="l_state" property="lState" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     l_id, l_create_user_id, l_start_place, l_end_place, l_time, l_max_number, l_number, 
-    l_carpool_mode, l_has_car, l_gender_requirement, l_extra, l_state
+    l_carpool_mode, l_has_car, l_gender_requirement, l_create_time, l_extra, l_state
   </sql>
+  <select id="selectByCreateTimeDes" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_carpool_list where l_state=0
+    order by l_create_time desc
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -33,13 +40,13 @@
     insert into t_carpool_list (l_id, l_create_user_id, l_start_place, 
       l_end_place, l_time, l_max_number, 
       l_number, l_carpool_mode, l_has_car, 
-      l_gender_requirement, l_extra, l_state
-      )
+      l_gender_requirement, l_create_time, l_extra, 
+      l_state)
     values (#{lId,jdbcType=BIGINT}, #{lCreateUserId,jdbcType=BIGINT}, #{lStartPlace,jdbcType=VARCHAR}, 
       #{lEndPlace,jdbcType=VARCHAR}, #{lTime,jdbcType=TIMESTAMP}, #{lMaxNumber,jdbcType=INTEGER}, 
       #{lNumber,jdbcType=INTEGER}, #{lCarpoolMode,jdbcType=VARCHAR}, #{lHasCar,jdbcType=VARCHAR}, 
-      #{lGenderRequirement,jdbcType=VARCHAR}, #{lExtra,jdbcType=VARCHAR}, #{lState,jdbcType=INTEGER}
-      )
+      #{lGenderRequirement,jdbcType=VARCHAR}, #{lCreateTime,jdbcType=TIMESTAMP}, #{lExtra,jdbcType=VARCHAR}, 
+      #{lState,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.carpool.entity.CarpoolList" >
     insert into t_carpool_list
@@ -73,6 +80,9 @@
       </if>
       <if test="lGenderRequirement != null" >
         l_gender_requirement,
+      </if>
+      <if test="lCreateTime != null" >
+        l_create_time,
       </if>
       <if test="lExtra != null" >
         l_extra,
@@ -112,6 +122,9 @@
       <if test="lGenderRequirement != null" >
         #{lGenderRequirement,jdbcType=VARCHAR},
       </if>
+      <if test="lCreateTime != null" >
+        #{lCreateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="lExtra != null" >
         #{lExtra,jdbcType=VARCHAR},
       </if>
@@ -150,6 +163,9 @@
       <if test="lGenderRequirement != null" >
         l_gender_requirement = #{lGenderRequirement,jdbcType=VARCHAR},
       </if>
+      <if test="lCreateTime != null" >
+        l_create_time = #{lCreateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="lExtra != null" >
         l_extra = #{lExtra,jdbcType=VARCHAR},
       </if>
@@ -170,6 +186,7 @@
       l_carpool_mode = #{lCarpoolMode,jdbcType=VARCHAR},
       l_has_car = #{lHasCar,jdbcType=VARCHAR},
       l_gender_requirement = #{lGenderRequirement,jdbcType=VARCHAR},
+      l_create_time = #{lCreateTime,jdbcType=TIMESTAMP},
       l_extra = #{lExtra,jdbcType=VARCHAR},
       l_state = #{lState,jdbcType=INTEGER}
     where l_id = #{lId,jdbcType=BIGINT}

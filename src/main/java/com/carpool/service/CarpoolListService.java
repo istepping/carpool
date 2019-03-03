@@ -1,6 +1,10 @@
 package com.carpool.service;
 
+import com.carpool.base.BaseService;
+import com.carpool.entity.CarpoolList;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author sunLei on 2019/3/2 19:32
@@ -8,4 +12,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface CarpoolListService {
+    void addCarpoolList(CarpoolList carpoolList);
+    BaseService.ServiceResult changeCarpoolList(CarpoolList carpoolList);
+    List<CarpoolList> getCarpoolListByCreateTime();
+    List<CarpoolList> getCarpoolListByTime();
 }

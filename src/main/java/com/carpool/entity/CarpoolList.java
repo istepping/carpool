@@ -23,9 +23,45 @@ public class CarpoolList {
 
     private String lGenderRequirement;
 
+    private Date lCreateTime;
+
     private String lExtra;
 
     private Integer lState;
+
+    public CarpoolList() {
+    }
+
+    public CarpoolList(Long lId, Long lCreateUserId, String lStartPlace, String lEndPlace, Date lTime, Integer lMaxNumber, String lCarpoolMode, String lHasCar, String lGenderRequirement,String lExtra) {
+        this.lId = lId;
+        this.lCreateUserId = lCreateUserId;
+        this.lStartPlace = lStartPlace;
+        this.lEndPlace = lEndPlace;
+        this.lTime = lTime;
+        this.lMaxNumber = lMaxNumber;
+        this.lNumber = lNumber;
+        this.lCarpoolMode = lCarpoolMode;
+        this.lHasCar = lHasCar;
+        this.lGenderRequirement = lGenderRequirement;
+        this.lCreateTime = lCreateTime;
+        this.lExtra = lExtra;
+        this.lState = lState;
+    }
+
+    public CarpoolList(Long lCreateUserId, String lStartPlace, String lEndPlace, Date lTime, Integer lMaxNumber, Integer lNumber, String lCarpoolMode, String lHasCar, String lGenderRequirement, Date lCreateTime, String lExtra, Integer lState) {
+        this.lCreateUserId = lCreateUserId;
+        this.lStartPlace = lStartPlace;
+        this.lEndPlace = lEndPlace;
+        this.lTime = lTime;
+        this.lMaxNumber = lMaxNumber;
+        this.lNumber = lNumber;
+        this.lCarpoolMode = lCarpoolMode;
+        this.lHasCar = lHasCar;
+        this.lGenderRequirement = lGenderRequirement;
+        this.lCreateTime = lCreateTime;
+        this.lExtra = lExtra;
+        this.lState = lState;
+    }
 
     public Long getlId() {
         return lId;
@@ -105,6 +141,14 @@ public class CarpoolList {
 
     public void setlGenderRequirement(String lGenderRequirement) {
         this.lGenderRequirement = lGenderRequirement == null ? null : lGenderRequirement.trim();
+    }
+
+    public Date getlCreateTime() {
+        return lCreateTime;
+    }
+
+    public void setlCreateTime(Date lCreateTime) {
+        this.lCreateTime = lCreateTime;
     }
 
     public String getlExtra() {

@@ -1,6 +1,7 @@
 package com.carpool.service;
 
 
+import com.carpool.base.BaseService;
 import com.carpool.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService{
     User getUserByWxId(String wxId);
+    User getUserInfo(Long uId);
+    BaseService.ServiceResult addUserInfo(User user);
 }

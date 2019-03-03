@@ -19,6 +19,20 @@ public class User {
 
     private String uState;
 
+    public User() {
+    }
+
+    public User(String wxId, String uNickName, String uAvatarUrl, String uGender, String uCity, String uProvince, String uLanguage, String uState) {
+        this.wxId = wxId;
+        this.uNickName = uNickName;
+        this.uAvatarUrl = uAvatarUrl;
+        this.uGender = uGender;
+        this.uCity = uCity;
+        this.uProvince = uProvince;
+        this.uLanguage = uLanguage;
+        this.uState = uState;
+    }
+
     public Long getuId() {
         return uId;
     }

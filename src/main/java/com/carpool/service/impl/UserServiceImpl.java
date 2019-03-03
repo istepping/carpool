@@ -22,4 +22,20 @@ public class UserServiceImpl extends BaseService implements UserService {
     public User getUserByWxId(String wxId) {
         return userMapper.selectByWxId(wxId);
     }
+    @Override
+    public ServiceResult addUserInfo(User user) {
+        if(user.getuId()==null){
+            return fail();
+        }
+        if(userMapper.selectByPrimaryKey(user.getuId())==null){
+            userMapper.insertSelective(user);
+        }else{
+            userMapper.updateByPrimaryKeySelective(user);
+        }
+        return success();
+    }
+    @Override
+    public User getUserInfo(Long uId) {
+        return userMapper.selectByPrimaryKey(uId);
+    }
 }
