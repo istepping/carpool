@@ -15,6 +15,17 @@ public class JoinGroup {
 
     private Integer jState;
 
+    public JoinGroup() {
+    }
+
+    public JoinGroup(Long gId, Long uId, Date jTime, Integer jIdentity, Integer jState) {
+        this.gId = gId;
+        this.uId = uId;
+        this.jTime = jTime;
+        this.jIdentity = jIdentity;
+        this.jState = jState;
+    }
+
     public Long getjId() {
         return jId;
     }

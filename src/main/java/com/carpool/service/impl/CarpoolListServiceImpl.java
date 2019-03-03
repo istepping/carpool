@@ -2,14 +2,21 @@ package com.carpool.service.impl;
 
 import com.carpool.base.BaseService;
 import com.carpool.dao.CarpoolListMapper;
+import com.carpool.dao.GroupMapper;
+import com.carpool.dao.JoinGroupMapper;
 import com.carpool.entity.CarpoolList;
+import com.carpool.entity.Group;
+import com.carpool.entity.JoinGroup;
 import com.carpool.service.CarpoolListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.carpool.utils.Assist.print;
+
 
 /**
  * @author sunLei on 2019/3/2 19:35
@@ -19,9 +26,21 @@ import java.util.List;
 public class CarpoolListServiceImpl extends BaseService implements CarpoolListService {
     @Autowired
     private CarpoolListMapper carpoolListMapper;
+    @Autowired
+    private GroupMapper groupMapper;
+    @Autowired
+    private JoinGroupMapper joinGroupMapper;
     @Override
     public void addCarpoolList(CarpoolList carpoolList) {
         carpoolListMapper.insertSelective(carpoolList);
+        //创建群聊
+        print("createTIme"+carpoolList.getlCreateTime());
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Long lId=carpoolListMapper.getLIdByUIdAndCreateTime(carpoolList.getlCreateUserId(),format.format(carpoolList.getlCreateTime()));
+        print("lId"+lId);
+        groupMapper.insert(new Group(lId,carpoolList.getlCreateUserId(),carpoolList.getlStartPlace(),0));
+        //默认加入群聊
+        joinGroupMapper.insert(new JoinGroup(lId,carpoolList.getlCreateUserId(),new Date(),1,0));
     }
 
     @Override

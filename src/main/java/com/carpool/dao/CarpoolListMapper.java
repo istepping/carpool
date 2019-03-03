@@ -1,10 +1,15 @@
 package com.carpool.dao;
 
 import com.carpool.entity.CarpoolList;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CarpoolListMapper {
+
+    Long getLIdByUIdAndCreateTime(@Param("uId") Long uId,@Param("createTime") String createTime);
+
     List<CarpoolList> selectByCreateTimeDes();
 
     int deleteByPrimaryKey(Long lId);

@@ -20,6 +20,11 @@
     l_id, l_create_user_id, l_start_place, l_end_place, l_time, l_max_number, l_number, 
     l_carpool_mode, l_has_car, l_gender_requirement, l_create_time, l_extra, l_state
   </sql>
+  <select id="getLIdByUIdAndCreateTime" resultType="Long">
+    select
+    l_id
+    from t_carpool_list where l_create_user_id = #{uId,jdbcType=BIGINT} and l_create_time = #{createTime,jdbcType=TIMESTAMP}
+  </select>
   <select id="selectByCreateTimeDes" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

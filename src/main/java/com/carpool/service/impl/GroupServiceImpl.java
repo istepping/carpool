@@ -1,7 +1,10 @@
 package com.carpool.service.impl;
 
 import com.carpool.base.BaseService;
+import com.carpool.dao.GroupMapper;
+import com.carpool.entity.Group;
 import com.carpool.service.GroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,5 +13,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GroupServiceImpl extends BaseService implements GroupService {
-
+    @Autowired
+    private GroupMapper groupMapper;
+    @Override
+    public void createGroup(Group group) {
+        groupMapper.insertSelective(group);
+    }
 }

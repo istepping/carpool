@@ -15,6 +15,26 @@ public class Group {
 
     private Integer gState;
 
+    public Group() {
+    }
+
+    public Group(Long lId, Long gCreateUserId, String gName, Integer gState) {
+        this.lId = lId;
+        this.gCreateUserId = gCreateUserId;
+        this.gName = gName;
+        this.gState = gState;
+    }
+
+    public Group(Long gId, Long lId, Long gCreateUserId, String gName, String gNotice, String gDescription, Integer gState) {
+        this.gId = gId;
+        this.lId = lId;
+        this.gCreateUserId = gCreateUserId;
+        this.gName = gName;
+        this.gNotice = gNotice;
+        this.gDescription = gDescription;
+        this.gState = gState;
+    }
+
     public Long getgId() {
         return gId;
     }

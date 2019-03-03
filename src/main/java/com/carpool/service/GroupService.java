@@ -1,5 +1,6 @@
 package com.carpool.service;
 
+import com.carpool.entity.Group;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +9,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface GroupService {
+    void createGroup(Group group);
 }
