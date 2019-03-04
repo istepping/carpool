@@ -32,15 +32,13 @@ public class CarpoolListServiceImpl extends BaseService implements CarpoolListSe
     private JoinGroupMapper joinGroupMapper;
     @Override
     public void addCarpoolList(CarpoolList carpoolList) {
-        carpoolListMapper.insertSelective(carpoolList);
+        carpoolListMapper.insert(carpoolList);
         //创建群聊
-        print("createTIme"+carpoolList.getlCreateTime());
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Long lId=carpoolListMapper.getLIdByUIdAndCreateTime(carpoolList.getlCreateUserId(),format.format(carpoolList.getlCreateTime()));
-        print("lId"+lId);
-        groupMapper.insert(new Group(lId,carpoolList.getlCreateUserId(),carpoolList.getlStartPlace(),0));
+        print("lId"+carpoolList.getlId());
+        Group group=new Group(carpoolList.getlId(),carpoolList.getlCreateUserId(),carpoolList.getlStartPlace(),0);
+        groupMapper.insert(group);
         //默认加入群聊
-        joinGroupMapper.insert(new JoinGroup(lId,carpoolList.getlCreateUserId(),new Date(),1,0));
+        joinGroupMapper.insert(new JoinGroup(group.getgId(),carpoolList.getlCreateUserId(),new Date(),1,0));
     }
 
     @Override

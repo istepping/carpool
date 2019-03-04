@@ -23,7 +23,7 @@
     delete from t_group
     where g_id = #{gId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.carpool.entity.Group" >
+  <insert id="insert" parameterType="com.carpool.entity.Group" useGeneratedKeys="true" keyProperty="gId">
     insert into t_group (g_id, l_id, g_create_user_id, 
       g_name, g_notice, g_description, 
       g_state)

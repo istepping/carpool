@@ -19,4 +19,14 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     public void createGroup(Group group) {
         groupMapper.insertSelective(group);
     }
+
+    @Override
+    public ServiceResult changeGroupInfo(Group group) {
+        if(group.getgId()==null || groupMapper.selectByPrimaryKey(group.getgId())==null){
+            return failInput();
+        } else{
+            groupMapper.updateByPrimaryKeySelective(group);
+            return success();
+        }
+    }
 }

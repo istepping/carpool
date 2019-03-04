@@ -1,5 +1,6 @@
 package com.carpool.service;
 
+import com.carpool.base.BaseService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +9,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface JoinGroupService {
+    BaseService.ServiceResult joinGroup(Long gId,Long uId);
+    BaseService.ServiceResult quitGroup(Long gId,Long uId);
 }

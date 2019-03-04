@@ -41,7 +41,7 @@
     delete from t_carpool_list
     where l_id = #{lId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.carpool.entity.CarpoolList" >
+  <insert id="insert" parameterType="com.carpool.entity.CarpoolList" useGeneratedKeys="true" keyProperty="lId">
     insert into t_carpool_list (l_id, l_create_user_id, l_start_place, 
       l_end_place, l_time, l_max_number, 
       l_number, l_carpool_mode, l_has_car, 

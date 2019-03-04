@@ -32,4 +32,13 @@ public class AuthUtil {
         }
         return uId;
     }
+    public static boolean isEmptyOrNull(String val){
+        return val==null || val.equals("");
+    }
+    public static boolean isNumber(String val){
+        if(val==null){
+            return false;
+        }
+        return val.matches("^\\d+$");
+    }
 }
