@@ -17,6 +17,18 @@ public class Message {
 
     private Integer mState;
 
+    public Message() {
+    }
+
+    public Message(Long gId, Long uId, String mContent, Date mTime, String mType, Integer mState) {
+        this.gId = gId;
+        this.uId = uId;
+        this.mContent = mContent;
+        this.mTime = mTime;
+        this.mType = mType;
+        this.mState = mState;
+    }
+
     public Long getmId() {
         return mId;
     }

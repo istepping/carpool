@@ -1,5 +1,7 @@
 package com.carpool.service;
 
+import com.carpool.base.BaseService;
+import com.carpool.entity.Message;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +10,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface MessageService {
+    BaseService.ServiceResult sendMessage(Message message);
+    BaseService.ServiceResult getMessage(Long gId,Long uId);
 }

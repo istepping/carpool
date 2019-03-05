@@ -13,6 +13,12 @@
   <sql id="Base_Column_List" >
     m_id, g_id, u_id, m_content, m_time, m_type, m_state
   </sql>
+  <select id="selectListByGIdAndUId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_message
+    where g_id=#{gId,jdbcType=BIGINT} and u_id=#{uId,jdbcType=BIGINT}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
