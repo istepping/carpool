@@ -23,6 +23,20 @@ import static com.carpool.utils.AuthUtil.userMap;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+    //用户登陆
+    @RequestMapping("/login")
+    @ResponseBody
+    public Result login(String code){
+        System.out.println("登陆请求");
+        BaseService.ServiceResult result=userService.login(code);
+        if(result.isSuccess()){
+            Map<String,Object> token=new HashMap<>();
+            token.put("token",result.getInfo());
+            return successResponse(token);
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
     //查询用户信息
     @RequestMapping("/getUserInfo")
     @ResponseBody

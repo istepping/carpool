@@ -22,6 +22,10 @@ public class User {
     public User() {
     }
 
+    public User(String wxId) {
+        this.wxId = wxId;
+    }
+
     public User(String wxId, String uNickName, String uAvatarUrl, String uGender, String uCity, String uProvince, String uLanguage, String uState) {
         this.wxId = wxId;
         this.uNickName = uNickName;

@@ -4,6 +4,9 @@ import com.carpool.base.BaseService;
 import com.carpool.dao.UserMapper;
 import com.carpool.entity.User;
 import com.carpool.service.UserService;
+import com.carpool.utils.API;
+import com.carpool.utils.AuthUtil;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,27 @@ import static com.carpool.utils.Assist.print;
 public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Override
+    public ServiceResult login(String code) {
+        if(AuthUtil.isEmptyOrNull(code)){
+            return failInput();
+        }
+        //获取opentid=wxid
+        String grant_type="authorization_code";
+        String url="https://api.weixin.qq.com/sns/jscode2session?" + "appid=" + "wx539fa405b462a369" + "&secret=" + "3b61707ae22e4991c630f9629cc8d12e"
+                + "&js_code=" + code + "&grant_type=" + grant_type;
+        JSONObject response= JSONObject.fromObject(API.INSTANCE.request(url));
+        String openid=(String)response.get("openid");
+        //查询是否已经注册
+        User user=userMapper.selectByWxId(openid);
+        if(user==null){
+            userMapper.insertSelective(new User(openid));
+        }
+        //返回结果
+        return success(openid);
+    }
+
     @Override
     public User getUserByWxId(String wxId) {
         return userMapper.selectByWxId(wxId);

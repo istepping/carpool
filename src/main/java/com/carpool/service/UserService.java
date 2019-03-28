@@ -14,4 +14,5 @@ public interface UserService{
     User getUserByWxId(String wxId);
     User getUserInfo(Long uId);
     BaseService.ServiceResult addUserInfo(User user);
+    BaseService.ServiceResult login(String code);
 }
