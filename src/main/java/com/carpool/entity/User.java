@@ -26,6 +26,17 @@ public class User {
         this.wxId = wxId;
     }
 
+    public User(Long uId, String uNickName, String uAvatarUrl, String uGender, String uCity, String uProvince, String uLanguage, String uState) {
+        this.uId = uId;
+        this.uNickName = uNickName;
+        this.uAvatarUrl = uAvatarUrl;
+        this.uGender = uGender;
+        this.uCity = uCity;
+        this.uProvince = uProvince;
+        this.uLanguage = uLanguage;
+        this.uState = uState;
+    }
+
     public User(String wxId, String uNickName, String uAvatarUrl, String uGender, String uCity, String uProvince, String uLanguage, String uState) {
         this.wxId = wxId;
         this.uNickName = uNickName;

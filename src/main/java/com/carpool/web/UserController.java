@@ -49,8 +49,9 @@ public class UserController extends BaseController {
     //录入用户信息
     @RequestMapping("/addUserInfo")
     @ResponseBody
-    public Result addUserInfo(String wxId,String nickName,String avatarUrl,String gender,String uCity,String province,String language){
-        User user=new User(wxId,nickName,avatarUrl,gender,uCity,province,language,"0");
+    public Result addUserInfo(String nickName,String avatarUrl,String gender,String uCity,String province,String language){
+        System.out.print("addUserInfo");
+        User user=new User(userMap.get(getRequest().getHeader("authorization")),nickName,avatarUrl,gender,uCity,province,language,"0");
         BaseService.ServiceResult result=userService.addUserInfo(user);
         if(result.isSuccess()){
             return successResponse();
