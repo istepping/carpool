@@ -14,6 +14,6 @@ import java.util.List;
 public interface CarpoolListService {
     void addCarpoolList(CarpoolList carpoolList);
     BaseService.ServiceResult changeCarpoolList(CarpoolList carpoolList);
-    List<CarpoolList> getCarpoolListByCreateTime();
-    List<CarpoolList> getCarpoolListByTime();
+    BaseService.ServiceResult getCarpoolListByCreateTime(Integer page);
+    BaseService.ServiceResult getCarpoolListByTime(Integer page);
 }

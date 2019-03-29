@@ -4,6 +4,7 @@ import com.carpool.base.BaseController;
 import com.carpool.base.BaseService;
 import com.carpool.entity.CarpoolList;
 import com.carpool.service.CarpoolListService;
+import com.carpool.utils.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,22 +57,38 @@ public class CarpoolListController extends BaseController {
             return failResponse(result.getInfo());
         }
     }
-    //查询最新拼单
+    //查询最新拼单,默认一页10条数据
     @RequestMapping("/getCarpoolListByCreateTime")
     @ResponseBody
-    public Result getCarpoolListByCreateTime(){
-        List<CarpoolList> carpoolList=carpoolListService.getCarpoolListByCreateTime();
-        Map<String,Object> data=new HashMap<>();
-        data.put("carpoolList",carpoolList);
-        return successResponse(data);
+    public Result getCarpoolListByCreateTime(String page){
+        if(!AuthUtil.isNumber(page)){
+            return failInputResponse();
+        }
+        if(Integer.parseInt(page)<=0){
+            return failInputResponse();
+        }
+        BaseService.ServiceResult result =carpoolListService.getCarpoolListByCreateTime(Integer.parseInt(page));
+        if(result.isSuccess()){
+            return successResponse(result.getData());
+        }else{
+            return failResponse(result.getInfo());
+        }
     }
     //查询最近拼单
     @RequestMapping("/getCarpoolListByTime")
     @ResponseBody
-    public Result getCarpoolListByTime(){
-        List<CarpoolList> carpoolList=carpoolListService.getCarpoolListByTime();
-        Map<String,Object> data=new HashMap<>();
-        data.put("carpoolList",carpoolList);
-        return successResponse(data);
+    public Result getCarpoolListByTime(String page){
+        if(!AuthUtil.isNumber(page)){
+            return failInputResponse();
+        }
+        if(Integer.parseInt(page)<=0){
+            return failInputResponse();
+        }
+        BaseService.ServiceResult result =carpoolListService.getCarpoolListByTime(Integer.parseInt(page));
+        if(result.isSuccess()){
+            return successResponse(result.getData());
+        }else{
+            return failResponse(result.getInfo());
+        }
     }
 }
