@@ -5,10 +5,14 @@ import com.carpool.base.BaseService;
 import com.carpool.entity.Group;
 import com.carpool.service.GroupService;
 import com.carpool.service.JoinGroupService;
+import com.carpool.utils.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.carpool.utils.AuthUtil.userMap;
 
@@ -24,6 +28,20 @@ public class GroupController extends BaseController{
     private GroupService groupService;
     @Autowired
     private JoinGroupService joinGroupService;
+    //获取群信息
+    @RequestMapping("/getGroup")
+    @ResponseBody
+    public Result getGroup(String gId){
+        if(!AuthUtil.isNumber(gId)){
+            return failInputResponse();
+        }
+        BaseService.ServiceResult result=groupService.getGroup(Long.valueOf(gId));
+        if(result.isSuccess()){
+            return successResponse(result.getData());
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
     //加入群聊
     @RequestMapping("/joinGroup")
     @ResponseBody

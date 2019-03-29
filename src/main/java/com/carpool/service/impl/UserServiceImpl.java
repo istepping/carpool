@@ -10,6 +10,9 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.carpool.utils.Assist.print;
 
 
@@ -37,9 +40,13 @@ public class UserServiceImpl extends BaseService implements UserService {
         User user=userMapper.selectByWxId(openid);
         if(user==null){
             userMapper.insertSelective(new User(openid));
+            user=userMapper.selectByWxId(openid);
         }
         //返回结果
-        return success(openid);
+        Map<String,Object> data=new HashMap<>();
+        data.put("token",openid);
+        data.put("uId",user.getuId());
+        return success(data);
     }
 
     @Override

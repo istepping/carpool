@@ -12,4 +12,5 @@ import org.springframework.stereotype.Service;
 public interface GroupService {
     void createGroup(Group group);
     BaseService.ServiceResult changeGroupInfo(Group group);
+    BaseService.ServiceResult getGroup(Long gId);
 }

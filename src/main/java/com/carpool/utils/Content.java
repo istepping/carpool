@@ -1,8 +1,10 @@
 package com.carpool.utils;
 
 import com.carpool.dto.CarpoolListDto;
+import com.carpool.dto.GroupInfo;
 import com.carpool.entity.CarpoolList;
 
+import javax.ejb.Asynchronous;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,4 +26,7 @@ public class Content {
     public static Long cacheTimeCarpoolListByTime=0L;
     /**有效时间*/
     public final static Long validTime=60*1000L;
+    /**群缓存*/
+    public static Map<String,GroupInfo> groupInfoCache=new ConcurrentHashMap<>();
+    public static Long groupInfoCacheTime=0L;
 }

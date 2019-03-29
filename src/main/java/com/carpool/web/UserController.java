@@ -30,9 +30,7 @@ public class UserController extends BaseController {
         System.out.println("登陆请求");
         BaseService.ServiceResult result=userService.login(code);
         if(result.isSuccess()){
-            Map<String,Object> token=new HashMap<>();
-            token.put("token",result.getInfo());
-            return successResponse(token);
+            return successResponse(result.getData());
         }else{
             return failResponse(result.getInfo());
         }
