@@ -13,6 +13,12 @@
   <sql id="Base_Column_List" >
     g_id, l_id, g_create_user_id, g_name, g_notice, g_description, g_state
   </sql>
+  <select id="selectByLId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_group
+    where l_id = #{lId,jdbcType=BIGINT}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

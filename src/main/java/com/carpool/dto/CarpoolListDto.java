@@ -9,12 +9,27 @@ import com.carpool.entity.CarpoolList;
 public class CarpoolListDto {
     private CarpoolList carpoolList;
     private String createName;
+    private Long gId;
     public CarpoolListDto() {
+    }
+
+    public CarpoolListDto(CarpoolList carpoolList, String createName, Long gId) {
+        this.carpoolList = carpoolList;
+        this.createName = createName;
+        this.gId = gId;
     }
 
     public CarpoolListDto(CarpoolList carpoolList, String createName) {
         this.carpoolList = carpoolList;
         this.createName = createName;
+    }
+
+    public Long getgId() {
+        return gId;
+    }
+
+    public void setgId(Long gId) {
+        this.gId = gId;
     }
 
     public CarpoolList getCarpoolList() {

@@ -91,7 +91,8 @@ public class CarpoolListServiceImpl extends BaseService implements CarpoolListSe
             for(int j=i*10;j<(i+1)*10;j++){
                 if(j<total){
                     User user=userMapper.selectByPrimaryKey(carpoolLists.get(j).getlCreateUserId());
-                    subList.add(new CarpoolListDto(carpoolLists.get(j),user.getuNickName()));
+                    Group group=groupMapper.selectByLId(carpoolLists.get(j).getlId());
+                    subList.add(new CarpoolListDto(carpoolLists.get(j),user.getuNickName(),group.getgId()));
                 }
             }
             //每页加入缓存
@@ -162,8 +163,9 @@ public class CarpoolListServiceImpl extends BaseService implements CarpoolListSe
             List<CarpoolListDto> subList=new ArrayList<>();
             for(int j=i*10;j<(i+1)*10;j++){
                 if(j<total){
+                    Group group=groupMapper.selectByLId(carpoolLists.get(j).getlId());
                     User user=userMapper.selectByPrimaryKey(carpoolLists.get(j).getlCreateUserId());
-                    subList.add(new CarpoolListDto(carpoolLists.get(j),user.getuNickName()));
+                    subList.add(new CarpoolListDto(carpoolLists.get(j),user.getuNickName(),group.getgId()));
                 }
             }
             //每页加入缓存
