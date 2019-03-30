@@ -46,6 +46,8 @@ public class UserServiceImpl extends BaseService implements UserService {
         Map<String,Object> data=new HashMap<>();
         data.put("token",openid);
         data.put("uId",user.getuId());
+        data.put("avatar",user.getuAvatarUrl());
+        data.put("nickName",user.getuNickName());
         return success(data);
     }
 
