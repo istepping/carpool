@@ -75,8 +75,8 @@ public class WebSocketServer {
         }
         this.users=users;
         clients.put(gId+uId,this);
-        //查看是否有缓存信息,及时推送
-        if(messageCache.containsKey(uId)){
+        //查看是否有缓存信息,及时推送gId+uId唯一标识
+        if(messageCache.containsKey(gId+uId)){
             List<MessageDto> messageDtos=messageCache.get(uId);
             this.session.getAsyncRemote().sendText(FastJsonUtils.toJSONString(messageDtos));
         }
@@ -108,7 +108,7 @@ public class WebSocketServer {
                     messages=new ArrayList<>();
                 }
                 messages.add(newMessageDto);
-                messageCache.put(user.getuId().toString(),messages);
+                messageCache.put(gId+user.getuId().toString(),messages);
             }
         }
     }
