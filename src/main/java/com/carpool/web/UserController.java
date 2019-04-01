@@ -3,6 +3,7 @@ package com.carpool.web;
 import com.carpool.base.BaseController;
 import com.carpool.base.BaseService;
 import com.carpool.entity.User;
+import com.carpool.service.CarpoolListService;
 import com.carpool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import static com.carpool.utils.AuthUtil.userMap;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+    //获取加入的拼单
     //用户登陆
     @RequestMapping("/login")
     @ResponseBody

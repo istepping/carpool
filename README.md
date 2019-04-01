@@ -14,6 +14,9 @@
 [webSocket消息推送](https://www.cnblogs.com/best/p/5695570.html)
 [可用](https://blog.csdn.net/qq_35515521/article/details/78610847)
 [request](https://blog.csdn.net/err118/article/details/78284129/)
-
+@time 2019.3.31
+创建的拼单,
+加入的拼单,
+历史拼单：包括取消的拼单
 
 
