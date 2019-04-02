@@ -37,7 +37,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         for(CarpoolList item:carpoolLists){
             User user=userMapper.selectByPrimaryKey(item.getlCreateUserId());
             int state=0;
-            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0){
+            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0)){
                 state=-1;
             }
             HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
@@ -55,7 +55,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         for(CarpoolList item:carpoolLists){
             User user=userMapper.selectByPrimaryKey(item.getlCreateUserId());
             int state=0;
-            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0){
+            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0)){
                 state=-1;
             }
             HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
@@ -73,7 +73,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         for(CarpoolList item:carpoolLists){
             User user=userMapper.selectByPrimaryKey(item.getlCreateUserId());
             int state=0;
-            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0){
+            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0)){
                 state=-1;
             }
             HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
