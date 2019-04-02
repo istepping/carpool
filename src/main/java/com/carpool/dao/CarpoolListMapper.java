@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface CarpoolListMapper {
+    List<CarpoolList> selectByCreatedUId(Long uId);
 
     Long getLIdByUIdAndCreateTime(@Param("uId") Long uId,@Param("createTime") String createTime);
 

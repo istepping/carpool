@@ -3,7 +3,6 @@ package com.carpool.web;
 import com.carpool.base.BaseController;
 import com.carpool.base.BaseService;
 import com.carpool.entity.User;
-import com.carpool.service.CarpoolListService;
 import com.carpool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,39 @@ import static com.carpool.utils.AuthUtil.userMap;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+    //获取创建的拼单
+    @RequestMapping("/getCreatedList")
+    @ResponseBody
+    public Result getCreatedList(){
+        BaseService.ServiceResult result=userService.getCreatedList(userMap.get(getRequest().getHeader("authorization")));
+        if(result.isSuccess()){
+            return successResponse(result.getData());
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
     //获取加入的拼单
+    @RequestMapping("/getJoinList")
+    @ResponseBody
+    public Result getJoinList(){
+        BaseService.ServiceResult result=userService.getCreatedList(userMap.get(getRequest().getHeader("authorization")));
+        if(result.isSuccess()){
+            return successResponse(result.getData());
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
+    //获取历史的拼单
+    @RequestMapping("/getHistoryList")
+    @ResponseBody
+    public Result getHistoryList(){
+        BaseService.ServiceResult result=userService.getHistoryList(userMap.get(getRequest().getHeader("authorization")));
+        if(result.isSuccess()){
+            return successResponse(result.getData());
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
     //用户登陆
     @RequestMapping("/login")
     @ResponseBody

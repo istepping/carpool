@@ -15,4 +15,7 @@ public interface UserService{
     User getUserInfo(Long uId);
     BaseService.ServiceResult addUserInfo(User user);
     BaseService.ServiceResult login(String code);
+    BaseService.ServiceResult getCreatedList(Long uId);
+    BaseService.ServiceResult getJoinList(Long uId);
+    BaseService.ServiceResult getHistoryList(Long uId);
 }

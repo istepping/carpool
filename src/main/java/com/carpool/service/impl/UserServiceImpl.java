@@ -1,7 +1,11 @@
 package com.carpool.service.impl;
 
 import com.carpool.base.BaseService;
+import com.carpool.dao.CarpoolListMapper;
+import com.carpool.dao.GroupMapper;
 import com.carpool.dao.UserMapper;
+import com.carpool.dto.HistoryList;
+import com.carpool.entity.CarpoolList;
 import com.carpool.entity.User;
 import com.carpool.service.UserService;
 import com.carpool.utils.API;
@@ -10,10 +14,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.carpool.utils.Assist.print;
+import java.util.*;
 
 
 /**
@@ -24,6 +25,64 @@ import static com.carpool.utils.Assist.print;
 public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CarpoolListMapper carpoolListMapper;
+    @Autowired
+    private GroupMapper groupMapper;
+
+    @Override
+    public ServiceResult getCreatedList(Long uId) {
+        List<CarpoolList> carpoolLists=carpoolListMapper.selectByCreatedUId(uId);
+        List<HistoryList> historyLists=new ArrayList<>();
+        for(CarpoolList item:carpoolLists){
+            User user=userMapper.selectByPrimaryKey(item.getlCreateUserId());
+            int state=0;
+            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0){
+                state=-1;
+            }
+            HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
+            historyLists.add(historyList);
+        }
+        Map<String,Object> data=new HashMap<>();
+        data.put("historyList",historyLists);
+        return success(data);
+    }
+
+    @Override
+    public ServiceResult getHistoryList(Long uId) {
+        List<CarpoolList> carpoolLists=carpoolListMapper.selectByCreatedUId(uId);
+        List<HistoryList> historyLists=new ArrayList<>();
+        for(CarpoolList item:carpoolLists){
+            User user=userMapper.selectByPrimaryKey(item.getlCreateUserId());
+            int state=0;
+            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0){
+                state=-1;
+            }
+            HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
+            historyLists.add(historyList);
+        }
+        Map<String,Object> data=new HashMap<>();
+        data.put("historyList",historyLists);
+        return success(data);
+    }
+
+    @Override
+    public ServiceResult getJoinList(Long uId) {
+        List<CarpoolList> carpoolLists=carpoolListMapper.selectByCreatedUId(uId);
+        List<HistoryList> historyLists=new ArrayList<>();
+        for(CarpoolList item:carpoolLists){
+            User user=userMapper.selectByPrimaryKey(item.getlCreateUserId());
+            int state=0;
+            if(item.getlState()==0 && (item.getlTime().getTime()-new Date().getTime()<0){
+                state=-1;
+            }
+            HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
+            historyLists.add(historyList);
+        }
+        Map<String,Object> data=new HashMap<>();
+        data.put("historyList",historyLists);
+        return success(data);
+    }
 
     @Override
     public ServiceResult login(String code) {
