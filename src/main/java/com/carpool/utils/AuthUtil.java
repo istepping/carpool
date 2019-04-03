@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.carpool.utils.Assist.print;
+
 /**
  * @author sunLei on 2019/3/2 19:55
  * @version 1.0
@@ -22,6 +24,7 @@ public class AuthUtil {
         Long uId=userMap.get(token);
         if(uId==null){
             //主动注入
+            print("查询用户");
             ApplicationContext context=new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
             UserService userService=(UserService) context.getBean("userServiceImpl");
             User user= userService.getUserByWxId(token);

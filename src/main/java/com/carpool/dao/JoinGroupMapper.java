@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface JoinGroupMapper {
+    List<JoinGroup> selectByUId(Long uId);
+
     List<JoinGroup> selectByGId(Long gId);
 
     JoinGroup selectByGIdAndUId(@Param("gId")Long gId,@Param("uId")Long uId);

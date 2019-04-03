@@ -12,6 +12,12 @@
   <sql id="Base_Column_List" >
     j_id, g_id, u_id, j_time, j_identity, j_state
   </sql>
+  <select id="selectByUId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from t_join_group
+    where u_id = #{uId,jdbcType=BIGINT}
+  </select>
   <select id="selectByGId" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select
     <include refid="Base_Column_List" />
