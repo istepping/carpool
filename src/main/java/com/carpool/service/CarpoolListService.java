@@ -16,4 +16,5 @@ public interface CarpoolListService {
     BaseService.ServiceResult changeCarpoolList(CarpoolList carpoolList);
     BaseService.ServiceResult getCarpoolListByCreateTime(Integer page);
     BaseService.ServiceResult getCarpoolListByTime(Integer page);
+    BaseService.ServiceResult deleteCarpoolListById(Long uId,Long lId);
 }

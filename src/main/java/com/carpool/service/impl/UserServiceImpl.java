@@ -11,6 +11,7 @@ import com.carpool.entity.JoinGroup;
 import com.carpool.entity.User;
 import com.carpool.service.UserService;
 import com.carpool.utils.API;
+import com.carpool.utils.Assist;
 import com.carpool.utils.AuthUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             HistoryList historyList=new HistoryList(user,item,groupMapper.selectByLId(item.getlId()).getgId(),state);
             historyLists.add(historyList);
         }
+        Assist.sortByTime(historyLists);
         Map<String,Object> data=new HashMap<>();
         data.put("historyList",historyLists);
         return success(data);
@@ -69,6 +71,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             HistoryList historyList=new HistoryList(user,carpoolList,item.getgId(),state);
             historyLists.add(historyList);
         }
+        Assist.sortByTime(historyLists);
         Map<String,Object> data=new HashMap<>();
         data.put("historyList",historyLists);
         return success(data);
@@ -91,6 +94,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             HistoryList historyList=new HistoryList(user,carpoolList,item.getgId(),state);
             historyLists.add(historyList);
         }
+        Assist.sortByTime(historyLists);
         Map<String,Object> data=new HashMap<>();
         data.put("historyList",historyLists);
         return success(data);
@@ -126,6 +130,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     public User getUserByWxId(String wxId) {
         return userMapper.selectByWxId(wxId);
     }
+
     @Override
     public ServiceResult addUserInfo(User user) {
         if(user.getuId()==null){
@@ -138,6 +143,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
         return success();
     }
+
     @Override
     public User getUserInfo(Long uId) {
         return userMapper.selectByPrimaryKey(uId);

@@ -29,6 +29,20 @@ import static com.carpool.utils.AuthUtil.userMap;
 public class CarpoolListController extends BaseController {
     @Autowired
     private CarpoolListService carpoolListService;
+    //删除拼单
+    @RequestMapping("/deleteCarpoolList")
+    @ResponseBody
+    public Result addCarpoolList(String lId){
+        if(!AuthUtil.isNumber(lId)){
+            return failInputResponse();
+        }
+        BaseService.ServiceResult result=carpoolListService.deleteCarpoolListById(userMap.get(getRequest().getHeader("authorization")),Long.valueOf(lId));
+        if(result.isSuccess()){
+            return successResponse();
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
     //创建拼单
     @RequestMapping("/addCarpoolList")
     @ResponseBody

@@ -34,6 +34,7 @@ public class CarpoolListServiceImpl extends BaseService implements CarpoolListSe
     private UserMapper userMapper;
     @Autowired
     private JoinGroupMapper joinGroupMapper;
+
     @Override
     public void addCarpoolList(CarpoolList carpoolList) {
         carpoolListMapper.insert(carpoolList);
@@ -185,5 +186,16 @@ public class CarpoolListServiceImpl extends BaseService implements CarpoolListSe
             data.put("page",page);
             return success(data);
         }
+    }
+
+    @Override
+    public ServiceResult deleteCarpoolListById(Long uId,Long lId) {
+        CarpoolList carpoolList=carpoolListMapper.selectByPrimaryKey(lId);
+        if(carpoolList==null || !carpoolList.getlCreateUserId().equals(uId)){
+            return fail("拼单不存在或没有权限");
+        }
+        carpoolList.setlState(-2);
+        carpoolListMapper.updateByPrimaryKeySelective(carpoolList);
+        return success();
     }
 }

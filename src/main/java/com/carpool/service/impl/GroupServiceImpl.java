@@ -33,6 +33,7 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     private JoinGroupMapper joinGroupMapper;
     @Autowired
     private UserMapper userMapper;
+
     @Override
     public void createGroup(Group group) {
         groupMapper.insertSelective(group);
