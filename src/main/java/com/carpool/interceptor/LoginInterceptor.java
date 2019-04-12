@@ -20,7 +20,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token=request.getHeader("authorization");
-        print(token);
         if(token!=null && AuthUtil.authLogin(token)!=null){
             return true;
         }else{

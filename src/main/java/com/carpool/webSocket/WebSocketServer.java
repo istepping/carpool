@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.carpool.utils.Assist.print;
+
 /**
  * @author sunLei on 2019/3/30 11:24
  * @version 1.0
@@ -46,6 +48,7 @@ public class WebSocketServer {
     /**连接*/
     @OnOpen
     public void onOpen(@PathParam("gId") String gId,@PathParam("uId") String uId, Session session){
+        print(uId+"接入连接");
         if(!AuthUtil.isNumber(gId) || !AuthUtil.isNumber(uId)){
             System.out.println("参数为空!");
             return;
@@ -77,8 +80,11 @@ public class WebSocketServer {
         clients.put(gId+uId,this);
         //查看是否有缓存信息,及时推送gId+uId唯一标识
         if(messageCache.containsKey(gId+uId)){
-            List<MessageDto> messageDtos=messageCache.get(uId);
+            print("有缓存消息");
+            List<MessageDto> messageDtos=messageCache.get(gId+uId);
+            print(FastJsonUtils.toJSONString(messageDtos));
             this.session.getAsyncRemote().sendText(FastJsonUtils.toJSONString(messageDtos));
+            messageCache.remove(gId+uId);
         }
         System.out.println("连接完成!");
     }
