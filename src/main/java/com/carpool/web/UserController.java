@@ -38,7 +38,7 @@ public class UserController extends BaseController {
     @RequestMapping("/getJoinList")
     @ResponseBody
     public Result getJoinList(){
-        BaseService.ServiceResult result=userService.getCreatedList(userMap.get(getRequest().getHeader("authorization")));
+        BaseService.ServiceResult result=userService.getJoinList(userMap.get(getRequest().getHeader("authorization")));
         if(result.isSuccess()){
             return successResponse(result.getData());
         }else{

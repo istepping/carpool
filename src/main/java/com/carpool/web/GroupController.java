@@ -57,6 +57,9 @@ public class GroupController extends BaseController{
     @RequestMapping("/quitGroup")
     @ResponseBody
     public Result quitGroup(String gId){
+        if(gId==null){
+            return failInputResponse();
+        }
         BaseService.ServiceResult result=joinGroupService.quitGroup(Long.valueOf(gId),userMap.get(getRequest().getHeader("authorization")));
         if(result.isSuccess()){
             return successResponse();

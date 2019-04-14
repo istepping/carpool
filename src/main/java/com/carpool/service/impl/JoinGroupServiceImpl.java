@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+import static com.carpool.utils.Assist.print;
+
 /**
  * @author sunLei on 2019/3/2 19:34
  * @version 1.0
@@ -35,15 +37,19 @@ public class JoinGroupServiceImpl extends BaseService implements JoinGroupServic
         //已经在群聊中
         JoinGroup joinGroup=joinGroupMapper.selectByGIdAndUId(gId, uId);
         if (joinGroup != null && joinGroup.getjState()==0) {
+            print("已经成功");
             return success("已经加入");
-        } else {
-            joinGroupMapper.insert(new JoinGroup(gId, uId, new Date(), 0, 0));
-            Group group = groupMapper.selectByPrimaryKey(gId);
-            CarpoolList carpoolList = carpoolListMapper.selectByPrimaryKey(group.getlId());
-            carpoolList.setlNumber(carpoolList.getlNumber() + 1);
-            carpoolListMapper.updateByPrimaryKeySelective(carpoolList);
-            return success("加入成功");
         }
+        if(joinGroup==null){
+            joinGroupMapper.insert(new JoinGroup(gId, uId, new Date(), 0, 0));
+        }else{
+            joinGroupMapper.updateByPrimaryKeySelective(new JoinGroup(joinGroup.getjId(),gId, uId, new Date(), 0, 0));
+        }
+        Group group = groupMapper.selectByPrimaryKey(gId);
+        CarpoolList carpoolList = carpoolListMapper.selectByPrimaryKey(group.getlId());
+        carpoolList.setlNumber(carpoolList.getlNumber() + 1);
+        carpoolListMapper.updateByPrimaryKeySelective(carpoolList);
+        return success("加入成功");
     }
 
     @Override
@@ -59,6 +65,7 @@ public class JoinGroupServiceImpl extends BaseService implements JoinGroupServic
             Group group = groupMapper.selectByPrimaryKey(gId);
             CarpoolList carpoolList = carpoolListMapper.selectByPrimaryKey(group.getlId());
             carpoolList.setlNumber(carpoolList.getlNumber() - 1);
+            carpoolListMapper.updateByPrimaryKeySelective(carpoolList);
             return success("退出成功");
         }else{
             return success("已经退出");

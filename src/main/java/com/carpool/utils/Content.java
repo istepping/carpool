@@ -2,6 +2,7 @@ package com.carpool.utils;
 
 import com.carpool.dto.CarpoolListDto;
 import com.carpool.dto.GroupInfo;
+import com.carpool.dto.HistoryList;
 import com.carpool.entity.CarpoolList;
 
 import javax.ejb.Asynchronous;
@@ -29,4 +30,11 @@ public class Content {
     /**群缓存*/
     public static Map<String,GroupInfo> groupInfoCache=new ConcurrentHashMap<>();
     public static Long groupInfoCacheTime=0L;
+    /**用户信息查询缓存*/
+    public static Map<Long,List<HistoryList>> createdListCache=new ConcurrentHashMap<>();
+    public static Map<Long,List<HistoryList>> joinedListCache=new ConcurrentHashMap<>();
+    public static Map<Long,List<HistoryList>> historyListCache=new ConcurrentHashMap<>();
+    public static Long cacheTimeCreatedListCache=0L;
+    public static Long cacheTimeJoinedListCache=0L;
+    public static Long cacheTimeHistoryListCache=0L;
 }
