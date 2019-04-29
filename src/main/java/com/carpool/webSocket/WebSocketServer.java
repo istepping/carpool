@@ -87,6 +87,8 @@ public class WebSocketServer {
             messageCache.remove(gId+uId);
         }
         System.out.println("连接完成!");
+        //增加系统消息
+        onMessage(user.getuNickName()+"已上线,"+"当前在线人数:"+onlineNumber.get(gId)+"人",session);
     }
     /**收到客户端消息*/
     @OnMessage
@@ -109,7 +111,7 @@ public class WebSocketServer {
                 item.session.getAsyncRemote().sendText(FastJsonUtils.toJSONString(messageDtoList));
             }else{
                 //不在线,先缓存
-                List<MessageDto> messages=messageCache.get(user.getuId().toString());
+                List<MessageDto> messages=messageCache.get(gId+user.getuId().toString());
                 if(messages==null){
                     messages=new ArrayList<>();
                 }
@@ -140,6 +142,8 @@ public class WebSocketServer {
         //在线人数减少
         onlineNumber.put(gId,number);
         clients.remove(gId+uId);
+        //增加系统消息
+        onMessage(user.getuNickName()+"已离线,"+"当前在线人数:"+onlineNumber.get(gId)+"人",session);
     }
     public static synchronized int getOnLineNumber(String gId){
         Integer number=onlineNumber.get(gId);
