@@ -31,22 +31,26 @@ public class JoinGroupServiceImpl extends BaseService implements JoinGroupServic
 
     @Override
     public ServiceResult joinGroup(Long gId, Long uId) {
-        if (gId == null || uId == null || groupMapper.selectByPrimaryKey(gId)==null) {
+        Group group = groupMapper.selectByPrimaryKey(gId);
+        if (gId == null || uId == null || group==null) {
             return failInput();
         }
+        CarpoolList carpoolList = carpoolListMapper.selectByPrimaryKey(group.getlId());
         //已经在群聊中
         JoinGroup joinGroup=joinGroupMapper.selectByGIdAndUId(gId, uId);
         if (joinGroup != null && joinGroup.getjState()==0) {
             print("已经成功");
             return success("已经加入");
         }
+        //人数限制
+        if(carpoolList.getlNumber()>=carpoolList.getlMaxNumber()){
+            return fail("此拼单已达人数上限!");
+        }
         if(joinGroup==null){
             joinGroupMapper.insert(new JoinGroup(gId, uId, new Date(), 0, 0));
         }else{
             joinGroupMapper.updateByPrimaryKeySelective(new JoinGroup(joinGroup.getjId(),gId, uId, new Date(), 0, 0));
         }
-        Group group = groupMapper.selectByPrimaryKey(gId);
-        CarpoolList carpoolList = carpoolListMapper.selectByPrimaryKey(group.getlId());
         carpoolList.setlNumber(carpoolList.getlNumber() + 1);
         carpoolListMapper.updateByPrimaryKeySelective(carpoolList);
         return success("加入成功");
