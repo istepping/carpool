@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpool.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.carpool.entity.Comment" >
+    <id column="c_id" property="cId" jdbcType="BIGINT" />
+    <result column="p_id" property="pId" jdbcType="BIGINT" />
+    <result column="c_user_id" property="cUserId" jdbcType="BIGINT" />
+    <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.carpool.entity.Comment" extends="BaseResultMap" >
+    <result column="c_content" property="cContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, p_id, c_user_id, c_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    c_content
+  </sql>
+  <select id="selectList" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_comment
+    where p_id = #{pId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_comment
+    where c_id = #{cId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_comment
+    where c_id = #{cId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.carpool.entity.Comment" >
+    insert into t_comment (c_id, p_id, c_user_id, 
+      c_time, c_content)
+    values (#{cId,jdbcType=BIGINT}, #{pId,jdbcType=BIGINT}, #{cUserId,jdbcType=BIGINT}, 
+      #{cTime,jdbcType=TIMESTAMP}, #{cContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carpool.entity.Comment" >
+    insert into t_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="cUserId != null" >
+        c_user_id,
+      </if>
+      <if test="cTime != null" >
+        c_time,
+      </if>
+      <if test="cContent != null" >
+        c_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=BIGINT},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=BIGINT},
+      </if>
+      <if test="cUserId != null" >
+        #{cUserId,jdbcType=BIGINT},
+      </if>
+      <if test="cTime != null" >
+        #{cTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cContent != null" >
+        #{cContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carpool.entity.Comment" >
+    update t_comment
+    <set >
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=BIGINT},
+      </if>
+      <if test="cUserId != null" >
+        c_user_id = #{cUserId,jdbcType=BIGINT},
+      </if>
+      <if test="cTime != null" >
+        c_time = #{cTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cContent != null" >
+        c_content = #{cContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carpool.entity.Comment" >
+    update t_comment
+    set p_id = #{pId,jdbcType=BIGINT},
+      c_user_id = #{cUserId,jdbcType=BIGINT},
+      c_time = #{cTime,jdbcType=TIMESTAMP},
+      c_content = #{cContent,jdbcType=LONGVARCHAR}
+    where c_id = #{cId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carpool.entity.Comment" >
+    update t_comment
+    set p_id = #{pId,jdbcType=BIGINT},
+      c_user_id = #{cUserId,jdbcType=BIGINT},
+      c_time = #{cTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=BIGINT}
+  </update>
+</mapper>

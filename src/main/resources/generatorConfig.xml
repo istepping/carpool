@@ -40,16 +40,26 @@
 			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
 			   <!--selectByExampleQueryId="false">-->
 		<!--</table>-->
-		<table tableName="t_carpool_list" domainObjectName="CarpoolList"
-			   enableCountByExample="false" enableUpdateByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   selectByExampleQueryId="false">
-		</table>
+		<!--<table tableName="t_carpool_list" domainObjectName="CarpoolList"-->
+			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
+			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			   <!--selectByExampleQueryId="false">-->
+		<!--</table>-->
 		<!--<table tableName="t_join_group" domainObjectName="JoinGroup"-->
 			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
 			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
 			   <!--selectByExampleQueryId="false">-->
 		<!--</table>-->
+		<table tableName="t_post" domainObjectName="Post"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+		</table>
+		<table tableName="t_comment" domainObjectName="Comment"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+		</table>
 	</context>
 	<!-- mybatis-generator:generate -->
 </generatorConfiguration>

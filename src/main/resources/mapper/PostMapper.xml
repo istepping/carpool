@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpool.dao.PostMapper" >
+  <resultMap id="BaseResultMap" type="com.carpool.entity.Post" >
+    <id column="p_id" property="pId" jdbcType="BIGINT" />
+    <result column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="p_time" property="pTime" jdbcType="TIMESTAMP" />
+    <result column="p_like" property="pLike" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.carpool.entity.Post" extends="BaseResultMap" >
+    <result column="p_content" property="pContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    p_id, u_id, p_time, p_like
+  </sql>
+  <sql id="Blob_Column_List" >
+    p_content
+  </sql>
+  <select id="selectList" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_post
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_post
+    where p_id = #{pId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_post
+    where p_id = #{pId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.carpool.entity.Post" >
+    insert into t_post (p_id, u_id, p_time, 
+      p_like, p_content)
+    values (#{pId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{pTime,jdbcType=TIMESTAMP}, 
+      #{pLike,jdbcType=INTEGER}, #{pContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carpool.entity.Post" >
+    insert into t_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="pTime != null" >
+        p_time,
+      </if>
+      <if test="pLike != null" >
+        p_like,
+      </if>
+      <if test="pContent != null" >
+        p_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="pTime != null" >
+        #{pTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pLike != null" >
+        #{pLike,jdbcType=INTEGER},
+      </if>
+      <if test="pContent != null" >
+        #{pContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carpool.entity.Post" >
+    update t_post
+    <set >
+      <if test="uId != null" >
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="pTime != null" >
+        p_time = #{pTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pLike != null" >
+        p_like = #{pLike,jdbcType=INTEGER},
+      </if>
+      <if test="pContent != null" >
+        p_content = #{pContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carpool.entity.Post" >
+    update t_post
+    set u_id = #{uId,jdbcType=BIGINT},
+      p_time = #{pTime,jdbcType=TIMESTAMP},
+      p_like = #{pLike,jdbcType=INTEGER},
+      p_content = #{pContent,jdbcType=LONGVARCHAR}
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carpool.entity.Post" >
+    update t_post
+    set u_id = #{uId,jdbcType=BIGINT},
+      p_time = #{pTime,jdbcType=TIMESTAMP},
+      p_like = #{pLike,jdbcType=INTEGER}
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+</mapper>
