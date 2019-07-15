@@ -24,8 +24,8 @@ public class PostController extends BaseController{
     private PostService postService;
     @RequestMapping("/add")
     @ResponseBody
-    public Result add(String content){
-        BaseService.ServiceResult result=postService.add(new Post(userMap.get(getRequest().getHeader("authorization")),new Date(),0,content));
+    public Result add(String title,String content){
+        BaseService.ServiceResult result=postService.add(new Post(userMap.get(getRequest().getHeader("authorization")),new Date(),0,title,content));
         if(result.isSuccess()){
             return successResponse();
         }else{
@@ -37,6 +37,7 @@ public class PostController extends BaseController{
     public Result get(){
         BaseService.ServiceResult result=postService.get();
         if(result.isSuccess()){
+            System.out.print(result.getData());
             return successResponse(result.getData());
         }else{
             return failResponse(result.getInfo());

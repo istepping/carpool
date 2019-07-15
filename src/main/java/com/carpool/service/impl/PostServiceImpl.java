@@ -2,11 +2,15 @@ package com.carpool.service.impl;
 
 import com.carpool.base.BaseService;
 import com.carpool.dao.PostMapper;
+import com.carpool.dao.UserMapper;
+import com.carpool.dto.PostInfo;
 import com.carpool.entity.Post;
+import com.carpool.entity.User;
 import com.carpool.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +23,8 @@ import java.util.Map;
 public class PostServiceImpl extends BaseService implements PostService {
     @Autowired
     private PostMapper postMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public ServiceResult add(Post post) {
@@ -30,7 +36,12 @@ public class PostServiceImpl extends BaseService implements PostService {
     public ServiceResult get() {
         Map<String, Object> data = new HashMap<>();
         List<Post> posts = postMapper.selectList();
-        data.put("posts", posts);
+        List<PostInfo> postInfos=new ArrayList<>();
+        for(Post post:posts){
+            User user=userMapper.selectByPrimaryKey(post.getuId());
+            postInfos.add(new PostInfo(post,user));
+        }
+        data.put("posts", postInfos);
         return success(data);
     }
 }

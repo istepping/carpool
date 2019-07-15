@@ -55,11 +55,11 @@
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false">
 		</table>
-		<table tableName="t_comment" domainObjectName="Comment"
-			   enableCountByExample="false" enableUpdateByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   selectByExampleQueryId="false">
-		</table>
+		<!--<table tableName="t_comment" domainObjectName="Comment"-->
+			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
+			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			   <!--selectByExampleQueryId="false">-->
+		<!--</table>-->
 	</context>
 	<!-- mybatis-generator:generate -->
 </generatorConfiguration>

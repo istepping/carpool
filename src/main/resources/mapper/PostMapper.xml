@@ -6,12 +6,13 @@
     <result column="u_id" property="uId" jdbcType="BIGINT" />
     <result column="p_time" property="pTime" jdbcType="TIMESTAMP" />
     <result column="p_like" property="pLike" jdbcType="INTEGER" />
+    <result column="p_title" property="pTitle" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.carpool.entity.Post" extends="BaseResultMap" >
     <result column="p_content" property="pContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    p_id, u_id, p_time, p_like
+    p_id, u_id, p_time, p_like, p_title
   </sql>
   <sql id="Blob_Column_List" >
     p_content
@@ -37,9 +38,11 @@
   </delete>
   <insert id="insert" parameterType="com.carpool.entity.Post" >
     insert into t_post (p_id, u_id, p_time, 
-      p_like, p_content)
+      p_like, p_title, p_content
+      )
     values (#{pId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{pTime,jdbcType=TIMESTAMP}, 
-      #{pLike,jdbcType=INTEGER}, #{pContent,jdbcType=LONGVARCHAR})
+      #{pLike,jdbcType=INTEGER}, #{pTitle,jdbcType=VARCHAR}, #{pContent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.carpool.entity.Post" >
     insert into t_post
@@ -55,6 +58,9 @@
       </if>
       <if test="pLike != null" >
         p_like,
+      </if>
+      <if test="pTitle != null" >
+        p_title,
       </if>
       <if test="pContent != null" >
         p_content,
@@ -73,6 +79,9 @@
       <if test="pLike != null" >
         #{pLike,jdbcType=INTEGER},
       </if>
+      <if test="pTitle != null" >
+        #{pTitle,jdbcType=VARCHAR},
+      </if>
       <if test="pContent != null" >
         #{pContent,jdbcType=LONGVARCHAR},
       </if>
@@ -90,6 +99,9 @@
       <if test="pLike != null" >
         p_like = #{pLike,jdbcType=INTEGER},
       </if>
+      <if test="pTitle != null" >
+        p_title = #{pTitle,jdbcType=VARCHAR},
+      </if>
       <if test="pContent != null" >
         p_content = #{pContent,jdbcType=LONGVARCHAR},
       </if>
@@ -101,6 +113,7 @@
     set u_id = #{uId,jdbcType=BIGINT},
       p_time = #{pTime,jdbcType=TIMESTAMP},
       p_like = #{pLike,jdbcType=INTEGER},
+      p_title = #{pTitle,jdbcType=VARCHAR},
       p_content = #{pContent,jdbcType=LONGVARCHAR}
     where p_id = #{pId,jdbcType=BIGINT}
   </update>
@@ -108,7 +121,8 @@
     update t_post
     set u_id = #{uId,jdbcType=BIGINT},
       p_time = #{pTime,jdbcType=TIMESTAMP},
-      p_like = #{pLike,jdbcType=INTEGER}
+      p_like = #{pLike,jdbcType=INTEGER},
+      p_title = #{pTitle,jdbcType=VARCHAR}
     where p_id = #{pId,jdbcType=BIGINT}
   </update>
 </mapper>

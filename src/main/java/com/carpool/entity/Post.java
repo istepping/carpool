@@ -11,15 +11,18 @@ public class Post {
 
     private Integer pLike;
 
+    private String pTitle;
+
     private String pContent;
 
     public Post() {
     }
 
-    public Post(Long uId, Date pTime, Integer pLike, String pContent) {
+    public Post(Long uId, Date pTime, Integer pLike, String pTitle, String pContent) {
         this.uId = uId;
         this.pTime = pTime;
         this.pLike = pLike;
+        this.pTitle = pTitle;
         this.pContent = pContent;
     }
 
@@ -53,6 +56,14 @@ public class Post {
 
     public void setpLike(Integer pLike) {
         this.pLike = pLike;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+
+    public void setpTitle(String pTitle) {
+        this.pTitle = pTitle == null ? null : pTitle.trim();
     }
 
     public String getpContent() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PostMapper {
     List<Post> selectList();
-
+    
     int deleteByPrimaryKey(Long pId);
 
     int insert(Post record);
