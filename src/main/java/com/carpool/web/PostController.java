@@ -22,6 +22,16 @@ import static com.carpool.utils.AuthUtil.userMap;
 public class PostController extends BaseController{
     @Autowired
     private PostService postService;
+    @RequestMapping("/like")
+    @ResponseBody
+    public Result like(String pId){
+        BaseService.ServiceResult result=postService.like(Long.valueOf(pId));
+        if(result.isSuccess()){
+            return successResponse();
+        }else{
+            return failResponse(result.getInfo());
+        }
+    }
     @RequestMapping("/add")
     @ResponseBody
     public Result add(String title,String content){

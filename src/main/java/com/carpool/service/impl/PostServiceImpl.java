@@ -44,4 +44,12 @@ public class PostServiceImpl extends BaseService implements PostService {
         data.put("posts", postInfos);
         return success(data);
     }
+
+    @Override
+    public ServiceResult like(Long pId) {
+        Post post=postMapper.selectByPrimaryKey(pId);
+        post.setpLike(post.getpLike()+1);
+        postMapper.updateByPrimaryKeySelective(post);
+        return success();
+    }
 }

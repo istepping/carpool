@@ -12,4 +12,5 @@ import org.springframework.stereotype.Service;
 public interface PostService {
     BaseService.ServiceResult add(Post post);
     BaseService.ServiceResult get();
+    BaseService.ServiceResult like(Long pId);
 }
